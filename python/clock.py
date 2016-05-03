@@ -1,13 +1,9 @@
-#www.stuffaboutcode.com
-#Raspberry Pi, Minecraft Analogue Clock
-
-import mcpi.minecraft as minecraft
-import mcpi.block as block
+from mcpi import minecraft
+from mcpi import block
 import time
 import datetime
 import math
 
-#mid point circle algorithm
 def drawCircle(mc, x0, y0, z, radius, blockType):
     f = 1 - radius
     ddf_x = 1
@@ -36,7 +32,6 @@ def drawCircle(mc, x0, y0, z, radius, blockType):
         mc.setBlock(x0 + y, y0 - x, z, blockType)
         mc.setBlock(x0 - y, y0 - x, z, blockType)
 
-#Brensenham line algorithm
 def drawLine(mc, x, y, z, x2, y2, blockType):
     steep = 0
     coords = []
@@ -62,7 +57,6 @@ def drawLine(mc, x, y, z, x2, y2, blockType):
         d = d + (2 * dy)
     mc.setBlock(x2, y2, z, blockType)
 
-#find point on circle
 def findPointOnCircle(cx, cy, radius, angle):
     x = cx + math.sin(math.radians(angle)) * radius
     y = cy + math.cos(math.radians(angle)) * radius
@@ -88,7 +82,6 @@ def drawSecondHand(mc, clockCentre, seconds, blockType):
     secondHandEnd = findPointOnCircle(clockCentre.x, clockCentre.y, 20.0, angle)
     drawLine(mc, clockCentre.x, clockCentre.y, clockCentre.z + 1, secondHandEnd[0], secondHandEnd[1], blockType)
 
-#function to draw the clock
 def drawClock(mc, clockCentre, radius, time):
     
     blockType = block.DIAMOND_BLOCK
@@ -129,26 +122,15 @@ if __name__ == "__main__":
 
     clockCentre = minecraft.Vec3(0, 30, 0)
     radius = 20
-    time.sleep(5)
-    #Connect to minecraft by creating the minecraft object
-    # - minecraft needs to be running and in a game
+
     mc = minecraft.Minecraft.create()
 
-    #Post a message to the minecraft chat window 
-    mc.postToChat("Hi, Minecraft Analogue Clock, www.stuffaboutcode.com")
-
-    time.sleep(2)
-    
     lastTime = datetime.datetime.now()
     #draw the clock
     drawClock(mc, clockCentre, radius, lastTime)
-    #loop until Ctrl C is pressed
-    try:
-        while True:
-            nowTime = datetime.datetime.now()
-            #update the time on the clock
-            updateTime(mc, clockCentre, lastTime, nowTime)
-            lastTime = nowTime
-            time.sleep(0.5)
-    except KeyboardInterrupt:
-        print "stopped"
+
+    while True:
+        nowTime = datetime.datetime.now()
+        updateTime(mc, clockCentre, lastTime, nowTime)
+        lastTime = nowTime
+        time.sleep(0.5)

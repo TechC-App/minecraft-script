@@ -1,7 +1,16 @@
 from mcpi import minecraft
 
-mc = minecraft.Minecraft.create()
+RANGE = 64
 
-mc.setBlocks(-100,-1,-100,100,30,100,0)
+if __name__ == "__main__":
+	mc = minecraft.Minecraft.create()
 
-mc.player.setPos(0.0, 0.0, 0.0)
+	mc.setBlocks(-RANGE, -RANGE, -RANGE,
+				 RANGE, -1, RANGE, 1)
+
+	mc.setBlocks(-RANGE, -0, -RANGE,
+				 RANGE, RANGE, RANGE, 0)
+
+	mc.player.setPos(0.0, 0.0, 0.0)
+
+	mc.postToChat("reset maps and position.")
