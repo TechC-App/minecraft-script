@@ -1,0 +1,15 @@
+require 'minecraft-pi-ruby'
+
+RANGE = 64
+
+desc 'reset maps and position'
+task :reset do
+  mc = Minecraft.new
+  mc.set_position 0, 0, 0
+  mc.set_blocks -RANGE, -RANGE, -RANGE,
+                RANGE, -1, RANGE, Block::STONE
+  mc.set_blocks -RANGE, 0, -RANGE,
+                RANGE, RANGE, RANGE, Block::AIR
+
+  mc.say 'reset maps and position.'
+end

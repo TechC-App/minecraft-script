@@ -1,0 +1,28 @@
+GIT
+  remote: https://github.com/mokemoko/minecraft-pi-ruby
+  revision: e7ddb5eb9bdaec23635016a5f643cee059290f29
+  specs:
+    minecraft-pi-ruby (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (1.1.1)
+    method_source (0.8.2)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    rake (10.4.2)
+    slop (3.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minecraft-pi-ruby!
+  pry
+  rake
+
+BUNDLED WITH
+   1.12.1
